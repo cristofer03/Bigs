@@ -73,11 +73,12 @@ export default class Login extends Component {
         fetch(URL)
 		
 		.then((response) => response.text())
-		 .then((responseText)=>{
-             console.log("DATOS QUE ESTOY TRALLENDO",responseText)
-             var responseNew = (responseText.length)
-             console.log(responseNew)
-			 if(responseNew == 19){
+		 .then((responseFormData)=>{
+            AsyncStorage.setItem('database_form', responseFormData).then();
+             console.log("DATOS QUE ESTOY TRALLENDO",responseFormData)
+            //  var responseNew = [responseFormData._parts]
+            //  console.log('DATOS DE MI NUEVA VARIABLE',(responseNew))
+			 if(responseFormData == "NO/Incorrecto/00/00"){
 				 
 				 alert("ID o Clave incorrecto.");
 				 // redirect to profile page

@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import Transaction from '../screens/Transaction';
-import LinksScreen from '../screens/LinksScreen';
+import List from '../screens/LinksScreen';
 import RechargeScreen from '../screens/RechargeScreen';
 
 const BottomTab = createBottomTabNavigator();
@@ -27,7 +27,7 @@ export default function BottomTabNavigator({ navigation, route }) {
       />
       <BottomTab.Screen
         name="Links"
-        component={LinksScreen}
+        component={List}
         options={{
           title: 'Servicios',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,

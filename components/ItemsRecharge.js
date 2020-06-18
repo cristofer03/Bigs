@@ -53,8 +53,8 @@ export default function ItemsRecharge() {
                       key={item.id}
                       imgSrc={item.imgSrc1}
                       desc={item.desc} 
-                      imgWidth={150} 
-                      imgHeight={150}
+                      imgWidth={89} 
+                      imgHeight={89}
                     />
                 </ScrollView>
               )
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
   item: {
-    backgroundColor: 'blue',
+    backgroundColor: 'black',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,

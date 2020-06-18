@@ -18,6 +18,7 @@ import { MonoText } from '../components/StyledText';
 import ItemsRecharge from '../components/ItemsRecharge';
 // import { SafeAreaView } from 'react-native-safe-area-context';
 
+
 const enviarRecarga = () =>{
   Alert.alert(
     'AVISO',
