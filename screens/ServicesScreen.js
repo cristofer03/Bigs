@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
-export default class List extends Component {
+export default class Services extends Component {
 
   constructor(){
     super()
@@ -20,6 +20,8 @@ export default class List extends Component {
       console.log(err)
     }
   }
+
+  
 
 render(){
   const data = (this.state.list)

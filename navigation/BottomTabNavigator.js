@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import TabBarIcon from '../components/TabBarIcon';
 import Transaction from '../screens/Transaction';
-import List from '../screens/LinksScreen';
+import Services from '../screens/ServicesScreen';
 import RechargeScreen from '../screens/RechargeScreen';
 
 const BottomTab = createBottomTabNavigator();
@@ -26,15 +26,15 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={List}
+        name="Services"
+        component={Services}
         options={{
           title: 'Servicios',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="ios-home" />,
         }}
       />
             <BottomTab.Screen
-        name="Transacciones"
+        name="Transaction"
         component={Transaction}
         options={{
           title: 'Transacciones',
@@ -51,7 +51,7 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return 'Recargas';
-    case 'Links':
+    case 'Services':
       return 'Servicios';
       case 'Transacciones':
         return 'Transacciones';

@@ -1,192 +1,190 @@
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { Image,
-         SafeAreaView, 
-         Platform, 
-         StyleSheet, 
-         View, 
-         TextInput,
-         KeyboardAvoidingView, 
-         FlatList,
-         Text,
-         Button,
-         Alert
-        } 
-        from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import { MonoText } from '../components/StyledText';
+import { Ionicons } from '@expo/vector-icons';
+import React, {Component} from 'react';
+import {     AppRegistry,
+  View, 
+  Text, 
+  SafeAreaView, 
+  Image, 
+  ImageBackground, 
+  TextInput,
+  Dimensions,
+  Keyboard,
+  AsyncStorage,
+  Alert,
+  KeyboardAvoidingView, 
+  StyleSheet
+ } from 'react-native';
+  import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import ItemsRecharge from '../components/ItemsRecharge';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-const enviarRecarga = () =>{
-  Alert.alert(
-    'AVISO',
-    'DESEA ENVIAR ESTA RECARGA?',
-    [
-      {text: 'NO', onPress: () => ('NO Pressed'), style: 'cancel'},
-      {text: 'SI', onPress: () => ('YES Pressed')},
-    ]
-  );
 
-}
+export default class Recharge extends Component {
+  constructor(props){
+		super(props)
+		this.state={
+			rechargeOperator:'',
+      rechargeNumber:'',
+      rechargeMount:'',
+      list: '',
+      enviarToken:'hola'
+    }
+    try {
+      AsyncStorage.getItem('database_form').then((value) => {
+        this.setState({
+          list: value,
 
-const DATA = [
-  {
-    id: 'bd7acbea',
-    title: "$20",
-  },
-  {
-    id: '3ac68afc',
-    title: "$50",
-  },
-  {
-    id: '3ad53abb28ba',
-    title: "$100",
-  },
-  {
-    id: '58694a0f',
-    title: "$500",
-  },
-];
+        })
+      })
+    } catch(err){
+      console.log(err)
+    }
+  }
 
-function Item({ id, title, selected, onSelect }) {
-  return (
-    <TouchableOpacity
-      onPress={() => onSelect(title)}
-      style={[
-      styles.item,
-      { backgroundColor: selected ? 'blue' : 'gray'},
-    ]}
-    >
-        <Text style={styles.title}>{title}</Text>
-    </TouchableOpacity>
-  );
-}
-
-export default function RechargeScreen() {
-  const [value, onChangeText] = React.useState('NUMERO TELEFONICO');
-
-  const [selected, setSelected] = React.useState(new Map());
-  console.log(selected);
-
-  const onSelect = React.useCallback(
-    title => {
-      const newSelected = new Map(selected);
-      newSelected.set(title, !selected.get(title));
-      setSelected(newSelected);
-    },
-    console.log([selected]),
-  );
-
-  return (
+	
+	recharge = () =>{
+    const {rechargeNumber,rechargeMount} = this.state;
+    if(rechargeNumber==""){
+      alert("Ingrese el numero de telefono");
+      this.setState({rechargeNumber:''})
+      
+    }
     
-      <KeyboardAvoidingView
-      behavior={Platform.OS == "ios" ? "padding" : "padding"}
-      style={styles.container}
-      >
+    
+    
+    else if(rechargeMount==""){
+            alert("Ingrese el monto");
+    this.setState({rechargeMount:''})
+    }
+        else
         
+        {    const input = (this.state.list);
+          const fields = input.split('/');
+          const token = fields[0];
+          const pass = fields[1];
+    const URL= `https://ws.bigs.do/plataforma/ws2/GET_Serv_${this.state.rechargeOperator}.php?parametros=qvseqccehpyo/${token}/${pass}/${this.state.rechargeNumber}/${this.state.rechargeMount}`;
+
+    console.log(URL)
+      
+        fetch(URL)
         
-          
-          <ItemsRecharge/>
-              <View style={{padding: 50, alignItems: "center"}}>
-                <TextInput
-                  style={{  
-                    height: 50, 
-                    textAlign: "center", 
-                    width: 300, 
-                    borderColor: 'gray', 
-                    borderWidth: 2, 
-                    borderRadius: 5 }}
-                  onChangeText={text => onChangeText(text)}
-                  placeholder='NUMERO TELEFONICO'
-                  keyboardType='phone-pad'
-                  
-                />
-              
-                <TextInput
-                  style={{
-                    padding: 8, alignItems: "center", 
-                    height: 50, 
-                    textAlign: "center", 
-                    width: 200, 
-                    borderColor: 'gray', 
-                    borderWidth: 2, 
-                    borderRadius: 5,  }}
-                    onChangeText={text => onChangeText(text)}
-                    onClear={text => Map('')}
-                  placeholder='MONTO'
-                  keyboardType='phone-pad'
-                  maxLength={4}
+    
+    .then((response) => response.text())
+     .then((responseRecharge)=>{
+            AsyncStorage.setItem('recharge_send', responseRecharge).then();
+             console.log("DATOS DE RECARGA",responseRecharge)
+       Alert.alert(
+         (responseRecharge)
+       )
+     })
+
+     
+     .catch((error)=>{
+         console.error(error);
+         console.log(error)
+         
+     });
+        }
+        
+    
+    
+    Keyboard.dismiss();
+    
+    }
+
+    
+
+render(){
+ const input = (this.state.list);
+  const fields = input.split('/');
+  const name = fields[2];
+
+  const data = (this.state.list)
+  return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS == "ios" ? "padding" : "padding"}
+    style={StyleSheet.container}
+    >
+      
+      
+        
+        <ItemsRecharge/>
+            <View style={{padding: 50, alignItems: "center"}}>
+
+  <Text>"Bienvenido"{name}</Text>
+
+            <TextInput
+                style={{
+                  padding: 8, alignItems: "center", 
+                  height: 50, 
+                  textAlign: "center", 
+                  width: 200, 
+                  borderColor: 'gray', 
+                  borderWidth: 2, 
+                  borderRadius: 5,  }}
+                  onChangeText={rechargeOperator => this.setState({rechargeOperator})}
+                placeholder='OPERADORA'
+                
+                
 />
-                  <FlatList
-                  numColumns={2}
-                  data={DATA}
-                  renderItem={({ item }) => (
-                        <Item
-                          id={item.id}
-                          title={item.title}
-                          selected={!!selected.get(item.title)}
-                          onSelect={onSelect}
-                        />                  
-                    )
-                    
-                  }
-                  keyExtractor={item => item.id}
-                  extraData={selected}
-                />
+
+              <TextInput
+                style={{  
+                  height: 50, 
+                  textAlign: "center", 
+                  width: 300, 
+                  borderColor: 'gray', 
+                  borderWidth: 2, 
+                  borderRadius: 5 }}
+                  onChangeText={rechargeNumber => this.setState({rechargeNumber})}
+                placeholder='NUMERO TELEFONICO'
+                keyboardType='phone-pad'
                 
+              />
+            
+              <TextInput
+                style={{
+                  padding: 8, alignItems: "center", 
+                  height: 50, 
+                  textAlign: "center", 
+                  width: 200, 
+                  borderColor: 'gray', 
+                  borderWidth: 2, 
+                  borderRadius: 5,  }}
+                  onChangeText={rechargeMount => this.setState({rechargeMount})}
+                placeholder='MONTO'
+                keyboardType='phone-pad'
+                maxLength={4}
+/>
 
 
-                
-                <View style={{paddingVertical: 15, width: 200, marginLeft: 100}}>
-                <TouchableOpacity
-                        style={{
-                        marginTop: 20, 
-                        width: 100, 
-                        height: 50, 
-                        borderRadius: 25, 
-                        backgroundColor: '#0080FF'}}
-                        onPress={enviarRecarga}
-                        >
-                    <Text style={{color: 'white', 
-                    fontSize: 20, 
-                    textAlign: 'center', 
-                    marginTop: 13}}>Enviar</Text>
-                    </TouchableOpacity>
-                </View>
-              </View>
+
               
-        
-        
-      </KeyboardAvoidingView>
+              <View style={{paddingVertical: 15, width: 200, marginLeft: 100}}>
+              <TouchableOpacity
+                      style={{
+                      marginTop: 20, 
+                      width: 100, 
+                      height: 50, 
+                      borderRadius: 25, 
+                      backgroundColor: '#0080FF'}}
+                      onPress={this.recharge}
+                      >
+                  <Text style={{color: 'white', 
+                  fontSize: 20, 
+                  textAlign: 'center', 
+                  marginTop: 13}}>Enviar</Text>
+                  </TouchableOpacity>
+              </View>
+            </View>
+            
+      
+      
+    </KeyboardAvoidingView>
   );
 }
+}
 
-RechargeScreen.navigationOptions = {
-  header: null,
-};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  item: {
-    padding: 10,
-    marginTop: 10,
-    width: 100,
-    marginRight: 2,
-    height: 50,
-    borderRadius: 5,
-  },
-  title: {
-    fontSize: 20,
-    textAlign: "center",
-  },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
-});
+
+AppRegistry.registerComponent('RechargeScreen', () => RechargeScreen);
