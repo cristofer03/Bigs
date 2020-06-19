@@ -98,6 +98,7 @@ render(){
  const input = (this.state.list);
   const fields = input.split('/');
   const name = fields[2];
+  const balance = fields[6];
 
   const data = (this.state.list)
   return (
@@ -111,7 +112,8 @@ render(){
         <ItemsRecharge/>
             <View style={{padding: 50, alignItems: "center"}}>
 
-  <Text>"Bienvenido"{name}</Text>
+  <Text>"Bienvenido" {name}</Text> 
+  <Text>Balance $RD:{balance}</Text>
 
             <TextInput
                 style={{
