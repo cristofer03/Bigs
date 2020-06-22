@@ -209,12 +209,13 @@ return (
       <Text style={{color: 'white'}}>Balance $RD:{balance}</Text>
       </View>
 
+      <View style={{ marginTop:5, alignItems: "center"}}>
 
-      <View style={{padding: 10, alignItems: "center"}}>
+      <View style={{ backgroundColor:'#FE9A2E' ,padding: 10, alignItems: "center", width: 200, height: 35, borderRadius: 25, marginTop: 3}}>
        
       <Text>SELECCIONE UNA COMPAÑIA</Text> 
       </View>
-      <View style={{ flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row', marginTop:5}}>
       <TouchableOpacity
       style={{
       width: 75, 
@@ -275,9 +276,10 @@ return (
       </TouchableOpacity>
       </View>
 
-      <View style={{ marginTop:5, alignItems: "center"}}>
+      
       <TextInput
       style={{
+      marginTop:3,
       padding: 8, 
       alignItems: "center", 
       height: 50, 
@@ -292,7 +294,7 @@ return (
       />
 
 
-      <View style={{padding: 10, alignItems: "center"}}>
+<View style={{ backgroundColor:'#FE9A2E' ,padding: 10, alignItems: "center", width: 225, height: 35, borderRadius: 25, marginTop: 3}}>
        <Text>DIGITE EL NUMERO DE TELEFONO</Text> 
        </View>
 
@@ -360,7 +362,7 @@ return (
       keyboardType='phone-pad'
       />
 
-<View style={{padding: 10, alignItems: "center"}}>
+<View style={{ backgroundColor:'#FE9A2E' ,padding: 10, alignItems: "center", width: 140, height: 35, borderRadius: 25, marginTop: 3}}>
        <Text>DIGITE UN MONTO</Text> 
        </View>
 
