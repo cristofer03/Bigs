@@ -34,11 +34,11 @@ export function CardCompany(props) {
   const onSelect = React.useCallback(
     id => {
       const newSelected = new Map(selected);
-      console.log({selected});
-      newSelected.set(id, !selected.get(props.imgSrc));
+      //console.log({selected});
+      newSelected.set(id, !selected.get(props.desc));
 
       setSelected(newSelected);
-      console.log({newSelected});
+      console.log("Lo que estoy seleccionando",{newSelected});
     },
     [selected],
   );
@@ -46,7 +46,7 @@ export function CardCompany(props) {
 
         return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={() => onSelect(props.imgSrc)}
+            <TouchableOpacity onPress={() => onSelect(props.desc)}
             style={[
                 { backgroundColor: selected ? 'white' : 'red'},
             ]}

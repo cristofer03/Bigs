@@ -11,7 +11,8 @@ import {
     Dimensions,
     Keyboard,
     ScrollView,
-    AsyncStorage
+    AsyncStorage,
+    KeyboardAvoidingView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -102,6 +103,8 @@ export default class Login extends Component {
   render() {
     return(
         <ImageBackground source={require('../assets/images/bg.png')} style={{flex: 1, width: Dimensions.get("window").width, height: Dimensions.get("window").height, resizeMode: 'stretch'}}>
+                
+    
             <View style={{ flex: 1, }}>
                 <View style={{flex: 1, alignItems: 'center'}}>
                     <Image source={require('../assets/images/bigstart.png')} style={{marginTop: 150, width: 350, height: 150, resizeMode: 'contain'}}>
@@ -134,7 +137,7 @@ export default class Login extends Component {
                     </TextInput>
                     </View>
 
-                    <View style={{marginTop:10}}>
+                    <KeyboardAvoidingView style={{marginTop:10}}>
                     <Icon
                         name='ios-lock'
                         size={28} color={'rgba(255, 255, 255, 0.7)'} 
@@ -157,12 +160,12 @@ export default class Login extends Component {
                         secureTextEntry={true}
                         keyboardType='phone-pad'
                         />
-
+</KeyboardAvoidingView>
                     
 
 
-                    </View>
                     
+<KeyboardAvoidingView style={{flex: 1, alignItems: 'center'}}>
                     <TouchableOpacity
                         style={{
                         marginTop: 20, 
@@ -177,15 +180,16 @@ export default class Login extends Component {
                     textAlign: 'center', 
                     marginTop: 13}}>Ingresar</Text>
                     </TouchableOpacity>
-
+                    
+                    </KeyboardAvoidingView>
                 </View>
             </View>
-            <View>
+            <View style={{flex: 0, alignItems: 'center'}}>
             <Text style={{
                 color: 'white', 
                 fontSize: 15, 
-                textAlign: 'center', 
-                marginTop: 10}}>© 2020 BigStart</Text>
+                textAlign: 'center',
+                 }}>© 2020 BigStart</Text>
 
                 
             </View>
