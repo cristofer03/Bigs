@@ -15,6 +15,8 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Home from './HomeScreen';
+import HomeScreen from './HomeScreen';
 
 
 
@@ -85,7 +87,7 @@ export default class Login extends Component {
 				 // redirect to profile page
 			 }else{
                  alert("Inicio de sesion exitoso!");
-                 this.props.navigation.navigate("Home");
+                 this.props.navigation.navigate(HomeScreen);
 			 }
 		 })
 		 .catch((error)=>{
